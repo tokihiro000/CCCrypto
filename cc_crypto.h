@@ -11,6 +11,6 @@
 
 - (id)initWithOperation:(CCOperation)op key:(unsigned char *)key iv:(unsigned char *)iv;
 - (NSUInteger)CLen;
-- (void *)CCCrypto:(NSData *)data ;
+- (NSData *)CCCrypto:(NSData *)data ;
 
 @end

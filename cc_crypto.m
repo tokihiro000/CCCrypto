@@ -15,7 +15,7 @@
   return CLen;
 }
 
-- (void *)CCCrypto:(NSData *)data {
+- (NSData *)CCCrypto:(NSData *)data {
   CCCryptorStatus err;
   CCCryptorRef ref;
   void *response;
@@ -26,8 +26,6 @@
   NSUInteger length = [data length];
 
   bufferSize = length + kCCBlockSizeAES128;
-
-  //NSLog(@"length = %lu, bufferSize = %zu, %@", length, bufferSize, [data description]);
 
   err = CCCryptorCreate(op, kCCAlgorithmAES128, kCCOptionPKCS7Padding, crypto_key, kCCKeySizeAES128, crypto_iv, &ref);
   NSLog(@"CCCryptorCreate = %d", err);
@@ -42,10 +40,14 @@
   if( err == 0 ) {
     printf("success\n");
     CLen = (updateResultLength + finalResultLength);
+    NSData* data = [NSData dataWithBytes:(const void *)response length:CLen];
+    CCCryptorRelease(ref);
+    return data;
+  } else {
+    CCCryptorRelease(ref);
+    return nil; 
   }
 
-  CCCryptorRelease(ref);
-  return response;
 }
 
 @end
