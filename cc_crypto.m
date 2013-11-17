@@ -27,7 +27,7 @@
 
   bufferSize = length + kCCBlockSizeAES128;
 
-  NSLog(@"length = %lu, bufferSize = %zu, %@", length, bufferSize, [data description]);
+  //NSLog(@"length = %lu, bufferSize = %zu, %@", length, bufferSize, [data description]);
 
   err = CCCryptorCreate(op, kCCAlgorithmAES128, kCCOptionPKCS7Padding, crypto_key, kCCKeySizeAES128, crypto_iv, &ref);
   NSLog(@"CCCryptorCreate = %d", err);
